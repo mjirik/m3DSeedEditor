@@ -1,8 +1,8 @@
-% Funkce umoznuje zvolit seedy v trojrozmernych datech.
+% Editor for seed selection in 3D data
 % seeds = m3DSeedEditor(im3d)
 % [seeds, sliceindex] = m3DSeedEditor(im3d, windowCenter, windowWidth)
 % 
-% Dalsi parametry
+% Params
 % 'wcenter': 0
 % 'wwidth': 0
 % 'seeds': zeros
