@@ -37,7 +37,7 @@ function varargout = m3DSeedEditor(varargin)
 
 % Edit the above text to modify the response to help m3DSeedEditor
 
-% Last Modified by GUIDE v2.5 27-Oct-2011 14:26:36
+% Last Modified by GUIDE v2.5 13-Sep-2012 10:49:07
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -479,17 +479,8 @@ imrgb = cat(3, imgr, imgg, imgb);
 
 
 end
-% --- Executes on key press with focus on figure1 or any of its controls.
-function figure1_WindowKeyPressFcn(hObject, eventdata, handles)
-% hObject    handle to figure1 (see GCBO)
-% eventdata  structure with the following fields (see FIGURE)
-%	Key: name of the key that was pressed, in lower case
-%	Character: character interpretation of the key(s) that was pressed
-%	Modifier: name(s) of the modifier key(s) (i.e., control, shift) pressed
-% handles    structure with handles and user data (see GUIDATA)
 
-
-    if(strcmp(eventdata.Key, 'm'))
+function seedMode(hObject, eventdata, handles)
 %         fcn = get(gcf, 'WindowKeyPressFcn');
 %         set(gcf, 'WindowKeyPressFcn', '');
  
@@ -506,17 +497,55 @@ function figure1_WindowKeyPressFcn(hObject, eventdata, handles)
         % odblokovani kolecka
         handles.scrollBlock = false;
         guidata(hObject, handles);
+end
+
+
+function quitFcn(hObject, eventdata, handles)
+set(handles.statusBarLabel, 'String', 'Exiting');
+        figure1_CloseRequestFcn(hObject, eventdata, handles);
+end
+
+% --- Executes on key press with focus on figure1 or any of its controls.
+function figure1_WindowKeyPressFcn(hObject, eventdata, handles)
+% hObject    handle to figure1 (see GCBO)
+% eventdata  structure with the following fields (see FIGURE)
+%	Key: name of the key that was pressed, in lower case
+%	Character: character interpretation of the key(s) that was pressed
+%	Modifier: name(s) of the modifier key(s) (i.e., control, shift) pressed
+% handles    structure with handles and user data (see GUIDATA)
+
+
+    if(strcmp(eventdata.Key, 'm'))
+        seedMode(hObject, eventdata, handles)
 %         set(gcf, 'WindowKeyPressFcn', {@figure1_WindowKeyPressFcn,guidata(hObject)}); 
 %         set(gcf, 'WindowKeyPressFcn', fcn);
     end
     
     if (strcmp(eventdata.Key, 'q'))
-        set(handles.statusBarLabel, 'String', 'Probiha ukoncovani prohlizece');
-        figure1_CloseRequestFcn(hObject, eventdata, handles);
-
+        quitFcn(hObject, eventdata, handles)
+        
     
 
        
         %m3DSeedEditor_OutputFcn(hObject, eventdata, handles);
     end
+end
+
+
+% --- Executes on button press in pushbutton2.
+function pushbutton2_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+seedMode(hObject, eventdata, handles)
+
+end
+
+
+% --- Executes on button press in pushbutton3.
+function pushbutton3_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton3 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+quitFcn(hObject, eventdata, handles)
 end
